@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm sản phẩm</title>
+</head>
+<body>
+    <h3>Thêm sản phẩm</h3>
+    <form th:action="@{/products/add}" th:object="${product}" method="post">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name" th:field="*{name}" style="width: 300px;height: 30px; font-size: 16px"><br>
+
+        <label for="price">Price:</label><br>
+        <input type="number" id="price" name="price" th:field="*{price}" step="0.001" style="width: 300px;height: 30px; font-size: 16px">
+<!--        <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Invalid price</span><br><br>-->
+        <br><br>
+
+        <label for="status">Status: </label><br>
+        <select id="status" class="form-select" th:field="*{status}" style="width: 300px;height: 30px; font-size: 16px">
+            <option th:each="st : ${T(vn.edu.iuh.fit.backend.enums.ProductStatus).values()}"
+                    th:value="${st}" th:text="${st}"></option>
+        </select><br><br>
+        <input type="submit">
+    </form>
+</body>
+</html>

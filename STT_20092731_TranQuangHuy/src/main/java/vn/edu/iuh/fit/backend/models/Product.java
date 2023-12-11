@@ -1,7 +1,9 @@
 package vn.edu.iuh.fit.backend.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 import lombok.*;
+import vn.edu.iuh.fit.backend.enums.ProductStatus;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -21,7 +23,12 @@ public class Product implements Serializable {
     @Column(name = "product_name", nullable = false)
     private String name;
     @Column(name = "price")
+//    @Min(value = 0, message = "Price must be greater than or equal to 0")
     private float price;
+
+    @Column(name = "status")
+    private ProductStatus status;
+
     @ManyToOne
     @JoinColumn(name = "product_type_id")
     private ProductType productType;

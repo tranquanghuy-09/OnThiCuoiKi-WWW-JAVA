@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cập nhật sản phẩm</title>
+</head>
+<body>
+<h3>Cập nhật sản phẩm</h3>
+<form th:action="@{/products/update}"  method="post">
+    <input type="hidden" th:value="${product.id}" th:field="${product.id}">
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" name="name" th:value="${product.name}" th:field="${product.name}" style="width: 300px;height: 30px; font-size: 16px"><br>
+
+    <label for="price">Price:</label><br>
+    <input type="number" id="price" name="price" th:value="${product.price}" th:field="${product.price}" step="0.001" style="width: 300px;height: 30px; font-size: 16px">
+    <br><br>
+
+    <label for="status">Status: </label><br>
+    <select th:field="${product.status}" id="status" class="form-control" aria-label="Default select example" style="width: 300px;height: 30px; font-size: 16px">
+        <option th:selected="${product.status == productStatus}" th:each="productStatus : ${productStatuses}" th:value="${productStatus}" th:text="${productStatus.name()}"></option>
+    </select><br><br>
+    <input type="submit">
+</form>
+</body>
+</html>

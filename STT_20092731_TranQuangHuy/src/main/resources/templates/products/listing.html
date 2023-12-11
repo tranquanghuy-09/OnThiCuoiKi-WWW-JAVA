@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Danh sách Sản phẩm</title>
+  <style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 80%;
+    }
+
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Danh sách Sản phẩm</h2>
+
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Price</th>
+    <th>Status</th>
+    <th colspan="2"><a th:href="@{/products/show-add-form}">ADD</a></th>
+  </tr>
+  <tr th:each="product : ${list}" >
+    <td th:text="${product.id}"></td>
+    <td th:text="${product.name}"></td>
+    <td th:text="${product.price}"></td>
+    <td th:text="${product.status}"></td>
+    <td><a th:href="@{/products/show-update-form?product_id={id}(id=${product.id})}">UPDATE</a></td>
+    <td><a th:href="@{/products/delete/{id}(id=${product.id})}">DELETE</a></td>
+  </tr>
+
+</table>
+</body>
+</html>

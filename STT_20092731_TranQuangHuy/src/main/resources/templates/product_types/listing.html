@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách Loại sản phẩm</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 80%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Danh sách loại sản phẩm</h2>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th></th>
+    </tr>
+    <tr th:each="producType : ${productTypeList}" >
+        <td th:text="${producType.id}"></td>
+        <td th:text="${producType.name}"></td>
+        <td><a th:href="@{/products?product_type_id={id}(id=${producType.id})}">Xem danh sách sản phẩm</a></td>
+
+    </tr>
+
+</table>
+</body>
+</html>
