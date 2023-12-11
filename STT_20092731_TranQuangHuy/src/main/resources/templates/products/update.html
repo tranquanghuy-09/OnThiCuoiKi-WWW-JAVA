@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Cập nhật sản phẩm</title>
+    <link th:href="@{css/nav.css}" rel="stylesheet">
 </head>
 <body>
+    <header th:insert="~{components/header}"></header>
 <h3>Cập nhật sản phẩm</h3>
 <form th:action="@{/products/update}"  method="post">
     <input type="hidden" th:value="${product.id}" th:field="${product.id}">
