@@ -1,5 +1,8 @@
 Huy đi ôn thi cuối kì WWW
 
+![Ảnh màn hình 2023-12-12 lúc 13 40 30](https://github.com/tranquanghuy-09/OnThiCuoiKi_WWW/assets/107989088/297c6f36-4323-4d01-90ef-7e7695a10996)
+
+
 ```
 INSERT INTO `product_types` (`product_type_id`, `product_type_name`) VALUES
 (1, 'Electronics'),
