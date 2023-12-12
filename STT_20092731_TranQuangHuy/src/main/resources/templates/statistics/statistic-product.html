@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Danh sách Sản phẩm</title>
+    <meta charset="UTF-8">
+    <title>Thống kê Product</title>
   <style>
     table {
       font-family: arial, sans-serif;
@@ -20,11 +20,22 @@
       background-color: #dddddd;
     }
   </style>
-  <link th:href="@{css/nav.css}" rel="stylesheet" >
+  <link rel="stylesheet" th:href="@{css/nav.css}">
 </head>
 <body>
+<header th:insert="~{components/header}"></header>
+<h2>Thống kê sản phẩm theo loại</h2>
+  <form th:action="@{/statistics/product_types}">
+    <label>
+      Chọn loại sản phẩm
+      <select name="product_type_id">
+        <option th:selected="${productTypeId == proType.id}" th:each="proType : ${productTypeList}" th:text="${proType.name}"
+        th:value="${proType.id}"></option>
+      </select>
+      <input type="submit">
+    </label>
 
-  <header th:insert="~{components/header}"></header>
+  </form>
 
 <h2>Danh sách Sản phẩm</h2>
 
@@ -34,15 +45,12 @@
     <th>Name</th>
     <th>Price</th>
     <th>Status</th>
-    <th colspan="2"><a th:href="@{/products/show-add-form}">ADD</a></th>
   </tr>
-  <tr th:each="product : ${list}" >
+  <tr th:each="product : ${listProduct}" >
     <td th:text="${product.id}"></td>
     <td th:text="${product.name}"></td>
     <td th:text="${product.price}"></td>
     <td th:text="${product.status}"></td>
-    <td><a th:href="@{/products/show-update-form?product_id={id}(id=${product.id})}">UPDATE</a></td>
-    <td><a th:href="@{/products/delete/{id}(id=${product.id})}">DELETE</a></td>
   </tr>
 
 </table>
