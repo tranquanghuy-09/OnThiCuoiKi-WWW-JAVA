@@ -1,11 +1,13 @@
 package vn.edu.iuh.fit.backend.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import lombok.*;
 import vn.edu.iuh.fit.backend.enums.ProductStatus;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
@@ -32,6 +34,24 @@ public class Product implements Serializable {
     @ManyToOne
     @JoinColumn(name = "product_type_id")
     private ProductType productType;
+    @Column(name = "input_time")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime inputTime;
+
+    public Product(String name, float price, ProductStatus status, ProductType productType) {
+        this.name = name;
+        this.price = price;
+        this.status = status;
+        this.productType = productType;
+    }
+
+    public Product(String name, float price, ProductStatus status, ProductType productType, LocalDateTime inputTime) {
+        this.name = name;
+        this.price = price;
+        this.status = status;
+        this.productType = productType;
+        this.inputTime = inputTime;
+    }
 
     @Override
     public boolean equals(Object o) {

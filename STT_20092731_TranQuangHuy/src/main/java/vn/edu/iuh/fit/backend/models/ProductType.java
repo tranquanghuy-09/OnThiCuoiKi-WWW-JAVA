@@ -23,6 +23,10 @@ public class ProductType implements Serializable {
     @OneToMany(mappedBy = "productType", cascade = CascadeType.ALL)
     private List<Product> products = new ArrayList<>();
 
+    public ProductType(String name) {
+        this.name = name;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

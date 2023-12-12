@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -40,6 +41,9 @@ public class SecurityConfig {
                 .requestMatchers(("/products/delete/**")).hasRole("ADMIN")//uri bat dau ban /admin thi phai dang nhap voi quyen admin
                 .anyRequest().permitAll()
         );
+        http.csrf(csrf -> csrf.ignoringRequestMatchers("/h2-console/**"))
+                .headers(h->h.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin));
+        http.csrf(AbstractHttpConfigurer::disable);
         http.httpBasic(Customizer.withDefaults());//cac thiet lap con lai thi theo mac dinh
         return http.build();
     }

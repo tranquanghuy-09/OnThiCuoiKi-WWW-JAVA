@@ -28,19 +28,34 @@
 <body>
     <header th:insert="~{components/header}"></header>
 <h3>Cập nhật sản phẩm</h3>
-<form th:action="@{/products/update}"  method="post">
-    <input type="hidden" th:value="${product.id}" th:field="${product.id}">
+<form th:action="@{/products/update}"  method="post" th:object="${product}">
+    <input type="hidden" th:value="${product.id}" th:field="*{id}">
     <label for="name">Name:</label><br>
-    <input type="text" id="name" name="name" th:value="${product.name}" th:field="${product.name}" style="width: 300px;height: 30px; font-size: 16px"><br>
+    <input type="text" id="name" name="name" th:value="${product.name}" th:field="*{name}" style="width: 300px;height: 30px; font-size: 16px"><br>
 
     <label for="price">Price:</label><br>
-    <input type="number" id="price" name="price" th:value="${product.price}" th:field="${product.price}" step="0.001" style="width: 300px;height: 30px; font-size: 16px">
+    <input type="number" id="price" name="price" th:value="${product.price}" th:field="*{price}" step="0.001" style="width: 300px;height: 30px; font-size: 16px">
     <br><br>
 
     <label for="status">Status: </label><br>
-    <select th:field="${product.status}" id="status" class="form-control" aria-label="Default select example" style="width: 300px;height: 30px; font-size: 16px">
+    <select th:field="*{status}" id="status" class="form-control" aria-label="Default select example" style="width: 300px;height: 30px; font-size: 16px">
         <option th:selected="${product.status == productStatus}" th:each="productStatus : ${productStatuses}" th:value="${productStatus}" th:text="${productStatus.name()}"></option>
     </select><br><br>
+
+<!--    <label for="inputTime">Input time:</label><br>-->
+<!--    <input type="datetime-local" id="inputTime" name="inputTime" th:value="${product.inputTime}" th:field="*{inputTime}" style="width: 300px;height: 30px; font-size: 16px"><br><br>-->
+
+    <label for="inputTime">Input time:</label><br>
+    <input type="datetime" id="inputTime" name="inputTime" th:value="${product.inputTime}" th:field="*{inputTime}" style="width: 300px;height: 30px; font-size: 16px"><br><br>
+
+
+    <label>
+        Loại sản phẩm: <br>
+        <select th:field="*{productType.id}" style="width: 300px;height: 30px; font-size: 16px">
+            <option th:each="proType:${productTypeList}" th:value="${proType.id}" th:text="${proType.name}" th:selected="${product.productType.name==proType.name}"></option>
+        </select>
+    </label><br><br>
+
     <input type="submit">
 </form>
 </body>

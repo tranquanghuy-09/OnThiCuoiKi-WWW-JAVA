@@ -17,6 +17,8 @@ import vn.edu.iuh.fit.backend.repositories.ProductRepository;
 import vn.edu.iuh.fit.backend.repositories.ProductTypeRepository;
 import vn.edu.iuh.fit.backend.services.ProductService;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -58,6 +60,22 @@ public class StatisticController {
         modelAndView.addObject("productTypeId", proTypeId);
         modelAndView.addObject("listProduct", list);
         modelAndView.setViewName("statistics/statistic-product");
+
+        return modelAndView;
+    }
+
+    @GetMapping("/huy")
+    public ModelAndView showOrdersStatistics(@RequestParam(value = "inputTime", required = false) LocalDate inputTime) {
+        ModelAndView modelAndView = new ModelAndView();
+        LocalDateTime inputTimeLocalDateTime = null;
+        if (inputTime == null) {
+            inputTimeLocalDateTime = LocalDateTime.of(2025, 1, 1, 0, 0, 0);
+        }else{
+            inputTimeLocalDateTime = inputTime.atStartOfDay();
+        }
+        List<Product> list = productRepository.getProductsByInputTime2(inputTimeLocalDateTime);
+        modelAndView.addObject("list",list);
+        modelAndView.setViewName("statistics/report");
 
         return modelAndView;
     }

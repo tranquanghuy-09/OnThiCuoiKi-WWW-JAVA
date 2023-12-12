@@ -34,6 +34,7 @@
     <th>Name</th>
     <th>Price</th>
     <th>Status</th>
+    <th>Input Time</th>
     <th colspan="2"><a th:href="@{/products/show-add-form}">ADD</a></th>
   </tr>
   <tr th:each="product : ${list}" >
@@ -41,6 +42,7 @@
     <td th:text="${product.name}"></td>
     <td th:text="${product.price}"></td>
     <td th:text="${product.status}"></td>
+    <td th:text="${product.inputTime}"></td>
     <td><a th:href="@{/products/show-update-form?product_id={id}(id=${product.id})}">UPDATE</a></td>
     <td><a th:href="@{/products/delete/{id}(id=${product.id})}">DELETE</a></td>
   </tr>

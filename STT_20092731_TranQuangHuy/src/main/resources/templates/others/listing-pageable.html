@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách loại sản phẩm</title>
+  <style>
+    table{
+      border-collapse: collapse;
+      width: 100%;
+    }
+    td,th{
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+    .active{
+        background: darkcyan;
+        color: wheat;
+    }
+  </style>
+  <link rel="stylesheet" th:href="@{/css/nav.css}">
+</head>
+<body>
+    <header th:insert="~{components/header}"></header>
+    <h2>Danh sách loại sản phẩm</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+        </tr>
+        <tr th:each="productType :${productTypePage.getContent()}">
+            <td th:text="${productType.id}"></td>
+            <td th:text="${productType.name}"></td>
+        </tr>
+    </table>
+    <div style="display: flex; justify-content: center">
+        <a style="margin-left: 5px" th:href="@{index(page=${p},size = 3)}" th:each="p:${pages}">
+            <button th:text="${p+1}" th:class="${curPage==p+1}?'active':''"></button>
+        </a>
+    </div>
+</body>
+</html>
