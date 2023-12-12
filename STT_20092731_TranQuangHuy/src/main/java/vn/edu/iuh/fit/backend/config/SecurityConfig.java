@@ -14,6 +14,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
@@ -36,9 +38,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(auth->auth
                 .requestMatchers(("/products/delete/**")).hasRole("ADMIN")//uri bat dau ban /admin thi phai dang nhap voi quyen admin
-                .requestMatchers("/","/home", "/product_types/**","/products/**").permitAll()//nhung links nay khong can authenticate
-                .requestMatchers("/api/**").hasAnyRole("ADMIN","USER")//nhung uri bat dau bang /api can phai dang nhap voi cac role admin/user                .anyRequest().authenticated()//cac uri khac can dang nhap duoi bat ky role nao
-                .anyRequest().authenticated()
+                .anyRequest().permitAll()
         );
         http.httpBasic(Customizer.withDefaults());//cac thiet lap con lai thi theo mac dinh
         return http.build();

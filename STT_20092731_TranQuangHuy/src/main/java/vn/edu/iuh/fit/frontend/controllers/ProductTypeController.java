@@ -17,7 +17,7 @@ public class ProductTypeController {
     @Autowired
     private ProductTypeRepository productTypeRepository;
 
-    @GetMapping({"","/product_types"})
+    @GetMapping({"/","/product_types"})
     public ModelAndView showListProductType(HttpSession session){
         ModelAndView modelAndView = new ModelAndView();
         List<ProductType> productTypeList = productTypeRepository.findAll();
