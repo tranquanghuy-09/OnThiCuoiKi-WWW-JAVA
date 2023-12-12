@@ -74,6 +74,7 @@ public class StatisticController {
             inputTimeLocalDateTime = inputTime.atStartOfDay();
         }
         List<Product> list = productRepository.getProductsByInputTime2(inputTimeLocalDateTime);
+        modelAndView.addObject("inputTimeDaNhap", inputTime);
         modelAndView.addObject("list",list);
         modelAndView.setViewName("statistics/report");
 
